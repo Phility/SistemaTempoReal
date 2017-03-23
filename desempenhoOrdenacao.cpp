@@ -9,19 +9,37 @@
 #include <stdlib.h>
 #include <time.h>  
 #include <cstdlib>
+#include <stdio.h>   // printf()
+#include <stdlib.h>  // exit()
+
+#define TAMANHO1 1000
+#define TAMANHO2 10000
+#define TAMANHO3 100000
 
 using namespace std;
 
+int *vetorBS, *vetorQS;
+
 void imprime(int* v, int t){
-	for(int i = 0; i < (t-t/2); i++){
+	for(int i = 0; i < 20; i++){
 		cout << v[i] << " ";
+	}
+}
+
+void criarVetor(int tamanhoVetor){
+	srand (time(NULL));
+	vetorBS = new int[tamanhoVetor];
+	vetorQS = new int[tamanhoVetor];
+	for (int i=0;i<tamanhoVetor;i++){
+		vetorBS[i] =  rand()%100000;
+        vetorQS[i] = vetorBS[i]; // utilizar os mesmos valores
 	}
 }
 
 void bubbleSort(int* vetor, int tamanho){
 	int auxiliar;
-	for(int i = 0; i < tamanho; i++){
-		for(int j = 0; j < tamanho; j++){
+	for(int i = 0; i < tamanho - 1; i++){
+		for(int j = 0; j < tamanho - 1; j++){
 			if(vetor[j] > vetor[j+1]){
 				auxiliar = vetor[j];
 				vetor[j] = vetor[j+1];
@@ -32,107 +50,110 @@ void bubbleSort(int* vetor, int tamanho){
 }
 
 //Função usada pelo qsort para comparar dois numeros
-int compare(const void* a, const void* b) {
+int compare( const void* a, const void* b ){
 	int* arg1 = (int*) a;
 	int* arg2 = (int*) b;
-	if(*arg1 < *arg2) return -1;
-	else if( *arg1 == *arg2 ) return 0;
-	else return 1;
+	if( *arg1 < *arg2 ){
+		return -1;
+	}
+	else if( *arg1 == *arg2 ){
+		return 0;
+	}
+	else{
+		return 1;
+	}
 }
 
 
 int main(){
-	int tamanho1 = 1000, tamanho2 = 10000, tamanho3 = 100000; 
-	int vetorBS1[tamanho1], vetorQS1[tamanho1], 
-		vetorBS2[tamanho2], vetorQS2[tamanho2], 
-		vetorBS3[tamanho3], vetorQS3[tamanho3];
-	time_t tempoIBS1, tempoIBS2, tempoIBS3,
-		   tempoFBS1, tempoFBS2, tempoFBS3,
-		   tempoIQS1, tempoIQS2, tempoIQS3,
-		   tempoFQS1, tempoFQS2, tempoFQS3,
-		   tempoReal;
+	time_t tempoInicial, tempoFinal;
+	clock_t clockInicial, clockFinal;
+	double tempoReal, clockReal;
 
-	//preenche os vetores com valores aleatorios
-	srand (time(NULL));
-	for(int i = 0; i < tamanho1; i++){
-		vetorBS1[i] = rand()%100000;
-		vetorQS1[i] = vetorBS1[i];
-	}
-	for(int i = 0; i < tamanho2; i++){
-		vetorBS2[i] = rand()%100000;
-		vetorQS2[i] = vetorBS2[i];
-	}
-	for(int i = 0; i < tamanho3; i++){
-		vetorBS3[i] = rand()%100000;
-		vetorQS3[i] = vetorBS3[i];
-	}
-
-	//CODIGO QUE IMPRIME OS VETORES
-	/*
-	cout << endl;
-	imprime(vetorBS1, tamanho1);
-	cout << endl;
-
-	cout << endl;
-	imprime(vetorQS1, tamanho2);
-	cout << endl;
-	*/
-	//FIM
-
-	cout << "Aperte 'ENTER' para calcular tempo com tamanho " << tamanho1 << endl; 
+	cout << "Aperte 'ENTER' para calcular tempo com tamanho " << TAMANHO1 << endl; 
+	criarVetor(TAMANHO1);
 	getchar();
-	tempoIBS1 = time( (time_t *) 0);
+	tempoInicial = time( (time_t *) 0);
+	clockInicial = clock();
 	//Argumentos: (vetor, tamanho)
-	bubbleSort(vetorBS1, tamanho1);
-	tempoFBS1 = time( (time_t *) 0);
-	tempoReal = tempoFBS1 - tempoIBS1;
+	bubbleSort(vetorBS, TAMANHO1);
+	clockFinal = clock();
+	tempoFinal = time( (time_t *) 0);
+	clockReal = (double)(clockFinal - clockInicial)/(double)(CLOCKS_PER_SEC);
+	tempoReal = tempoFinal - tempoInicial;
 
-	cout << "O tempo final para vetor de tamanho " << tamanho1 << " com BS eh: " << tempoReal << endl;
+	cout << "Tempo de Relógio (Segundos) de tamanho " << TAMANHO1 << " com BS eh: " << tempoReal << endl;
+	cout << "Tempo de utilização de CPU (Segundos) de tamanho " << TAMANHO1 << " com BS eh: " << clockReal << endl;
 
-	tempoIQS1 = time( (time_t *) 0); 
+	tempoInicial = time( (time_t *) 0);
+	clockInicial = clock();
 	//Argumentos: (vetor, tamanho, tamanho do tipo de cada elemento, valor compare)
-	qsort(vetorQS1, tamanho1, sizeof(int), compare);
-	tempoFQS1 = time( (time_t *) 0); 
-	tempoReal = tempoFQS1 - tempoIQS1;
+	qsort(vetorQS, TAMANHO1, sizeof(int), compare);
+	clockFinal = clock();
+	tempoFinal = time( (time_t *) 0);
+	clockReal = (double)(clockFinal - clockInicial)/(double)(CLOCKS_PER_SEC);
+	tempoReal = tempoFinal - tempoInicial;
 
-	cout << "O tempo final para vetor de tamanho " << tamanho1 << " com QS eh: " << tempoReal << endl;
+	cout << "Tempo de Relógio (Segundos) de tamanho " << TAMANHO1 << " com QS eh: " << tempoReal << endl;
+	cout << "Tempo de utilização de CPU (Segundos) de tamanho " << TAMANHO1 << " com QS eh: " << clockReal << endl;
 
 	cout << endl;
 	
-	cout << "Aperte 'ENTER' para calcular tempo com tamanho " << tamanho2 << endl;
+	delete vetorBS, vetorQS;
+
+	cout << "Aperte 'ENTER' para calcular tempo com tamanho " << TAMANHO2 << endl;
+	criarVetor(TAMANHO2);
 	getchar();
-	tempoIBS2 = time( (time_t *) 0); 
-	bubbleSort(vetorBS2, tamanho2);
-	tempoFBS2 = time( (time_t *) 0); 
-	tempoReal = tempoFBS2 - tempoIBS2;
+	tempoInicial = time( (time_t *) 0);
+	clockInicial = clock();
+	bubbleSort(vetorBS, TAMANHO2);
+	clockFinal = clock();
+	tempoFinal = time( (time_t *) 0);
+	clockReal = (double)(clockFinal - clockInicial)/(double)(CLOCKS_PER_SEC);
+	tempoReal = tempoFinal - tempoInicial;
 
-	cout << "O tempo final para vetor de tamanho " << tamanho2 << " com BS eh: " << tempoReal << endl;
+	cout << "Tempo de Relógio (Segundos) de tamanho " << TAMANHO2 << " com BS eh: " << tempoReal << endl;
+	cout << "Tempo de utilização de CPU (Segundos) de tamanho " << TAMANHO2 << " com BS eh: " << clockReal << endl;
 
-	tempoIQS2 = time( (time_t *) 0); 
-	qsort(vetorQS2, tamanho2, sizeof(int), compare);
-	tempoFQS2 = time( (time_t *) 0); 
-	tempoReal = tempoIQS2 - tempoFQS2;
+	tempoInicial = time( (time_t *) 0);
+	clockInicial = clock();
+	qsort(vetorQS, TAMANHO2, sizeof(int), compare);
+	clockFinal = clock();
+	tempoFinal = time( (time_t *) 0);
+	clockReal = (double)(clockFinal - clockInicial)/(double)(CLOCKS_PER_SEC);
+	tempoReal = tempoInicial - tempoFinal;
 
-	cout << "O tempo final para vetor de tamanho " << tamanho2 << " com QS eh: " << tempoReal << endl;
+	cout << "Tempo de Relógio (Segundos) de tamanho " << TAMANHO2 << " com QS eh: " << tempoReal << endl;
+	cout << "Tempo de utilização de CPU (Segundos) de tamanho " << TAMANHO2 << " com QS eh: " << clockReal << endl;
 
 	cout << endl;
 
-	cout << "Aperte 'ENTER' para calcular tempo com tamanho " << tamanho3 << endl;
+	delete vetorBS, vetorQS;
+
+	cout << "Aperte 'ENTER' para calcular tempo com tamanho " << TAMANHO3 << endl;
+	criarVetor(TAMANHO3);
 	getchar();
-	tempoIBS3 = time( (time_t *) 0); 
-	bubbleSort(vetorBS3, tamanho3);
-	tempoFBS3 = time( (time_t *) 0);
-	tempoReal = tempoFBS3 - tempoIBS3;
+	tempoInicial = time( (time_t *) 0);
+	clockInicial = clock();
+	bubbleSort(vetorBS, TAMANHO3);
+	clockFinal = clock();
+	tempoFinal = time( (time_t *) 0);
+	clockReal = (double)(clockFinal - clockInicial)/(double)(CLOCKS_PER_SEC);
+	tempoReal = tempoFinal - tempoInicial;
 
-	cout << "O tempo final para vetor de tamanho " << tamanho3 << " com BS eh: " << tempoReal << endl;
+	cout << "Tempo de Relógio (Segundos) de tamanho " << TAMANHO3 << " com BS eh: " << tempoReal << endl;
+	cout << "Tempo de utilização de CPU (Segundos) de tamanho " << TAMANHO3 << " com BS eh: " << clockReal << endl;
 
+	tempoInicial = time( (time_t *) 0);
+	clockInicial = clock();
+	qsort(vetorQS, TAMANHO3, sizeof(int), compare);
+	clockFinal = clock();
+	tempoFinal = time( (time_t *) 0);
+	clockReal = (double)(clockFinal - clockInicial)/(double)(CLOCKS_PER_SEC);
+	tempoReal = tempoFinal - tempoInicial;
 
-	tempoIQS3 = time( (time_t *) 0); 
-	qsort(vetorQS3, tamanho3, sizeof(int), compare);
-	tempoFQS3 = time( (time_t *) 0);
-	tempoReal = tempoFQS3 - tempoIQS3;
-
-	cout << "O tempo final para vetor de tamanho " << tamanho3 << " com QS eh: " << tempoReal << endl;
+	cout << "Tempo de Relógio (Segundos) de tamanho " << TAMANHO3 << " com QS eh: " << tempoReal << endl;
+	cout << "Tempo de utilização de CPU (Segundos) de tamanho " << TAMANHO3 << " com QS eh: " << clockReal << endl;
 
 	return 0;
 }

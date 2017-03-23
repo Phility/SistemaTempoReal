@@ -1,16 +1,16 @@
-// Sistema de Tempo Real
+//Sistema de Tempo Real
 //Unviversidade Federal do Rio Grande do Norte
 //Departamento de Engenharia de Computação e Automação
 //Alunos: Carlos Gabriel Gomes de Melo Silva
 //        Felipe Fernandes Lopes
 //        Philipy Augusto Silveira de Brito
 
+//PRGRAMA QUE CALCULA A DIFERENÇA DE TEMPO DE ORDENAÇÃO ENTRE BUBBLESORT E QUICKSORT
+
 #include <iostream>
 #include <stdlib.h>
 #include <time.h>  
 #include <cstdlib>
-#include <stdio.h>   // printf()
-#include <stdlib.h>  // exit()
 
 #define TAMANHO1 1000
 #define TAMANHO2 10000
@@ -32,7 +32,7 @@ void criarVetor(int tamanhoVetor){
 	vetorQS = new int[tamanhoVetor];
 	for (int i=0;i<tamanhoVetor;i++){
 		vetorBS[i] =  rand()%100000;
-        vetorQS[i] = vetorBS[i]; // utilizar os mesmos valores
+        vetorQS[i] = vetorBS[i]; //Cria vetores com os mesmos numeros
 	}
 }
 

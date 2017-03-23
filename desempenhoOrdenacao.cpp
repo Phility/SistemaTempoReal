@@ -71,16 +71,16 @@ int main(){
 	double tempoReal, clockReal;
 
 	cout << "Aperte 'ENTER' para calcular tempo com tamanho " << TAMANHO1 << endl; 
-	criarVetor(TAMANHO1);
-	getchar();
-	tempoInicial = time( (time_t *) 0);
-	clockInicial = clock();
+	getchar(); //ESPERA O USUÁRIO APARTAR ENTER PARA CONTINUAR
+	criarVetor(TAMANHO1); //CRIA OS VETORES COM TAMANHO1
+	tempoInicial = time( (time_t *) 0); //RECUPERA O TEMPO (segundos) INICIAL
+	clockInicial = clock(); //RECUPERA O TEMPO DE CLOCK INICIAL
 	//Argumentos: (vetor, tamanho)
 	bubbleSort(vetorBS, TAMANHO1);
-	clockFinal = clock();
-	tempoFinal = time( (time_t *) 0);
-	clockReal = (double)(clockFinal - clockInicial)/(double)(CLOCKS_PER_SEC);
-	tempoReal = tempoFinal - tempoInicial;
+	clockFinal = clock(); //RECUPERA O TEMPO DE CLOCK FINAL
+	tempoFinal = time( (time_t *) 0); //RECUPERA O TEMPO (segundos) FINAL
+	clockReal = (double)(clockFinal - clockInicial)/(double)(CLOCKS_PER_SEC); //CALCULA EM SEGUNDOS O TEMPO DE CLOCK
+	tempoReal = tempoFinal - tempoInicial; //CALCULA EM SEGUNDOS O TEMPO DE RELÓGIO
 
 	cout << "Tempo de Relógio (Segundos) de tamanho " << TAMANHO1 << " com BS eh: " << tempoReal << endl;
 	cout << "Tempo de utilização de CPU (Segundos) de tamanho " << TAMANHO1 << " com BS eh: " << clockReal << endl;
@@ -102,8 +102,8 @@ int main(){
 	delete vetorBS, vetorQS;
 
 	cout << "Aperte 'ENTER' para calcular tempo com tamanho " << TAMANHO2 << endl;
-	criarVetor(TAMANHO2);
 	getchar();
+	criarVetor(TAMANHO2);
 	tempoInicial = time( (time_t *) 0);
 	clockInicial = clock();
 	bubbleSort(vetorBS, TAMANHO2);
@@ -131,8 +131,8 @@ int main(){
 	delete vetorBS, vetorQS;
 
 	cout << "Aperte 'ENTER' para calcular tempo com tamanho " << TAMANHO3 << endl;
-	criarVetor(TAMANHO3);
 	getchar();
+	criarVetor(TAMANHO3);
 	tempoInicial = time( (time_t *) 0);
 	clockInicial = clock();
 	bubbleSort(vetorBS, TAMANHO3);

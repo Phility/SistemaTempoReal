@@ -5,6 +5,8 @@
 //        Felipe Fernandes Lopes
 //        Philipy Augusto Silveira de Brito
 
+//PROGRAMA QUE CALCULA A QUANTIDADE DE SEGUNDOS DESDE O NASCIMENTO ATE HOJE
+
 #include <iostream>
 #include <unistd.h>
 #include <time.h>

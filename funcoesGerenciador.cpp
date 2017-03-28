@@ -32,8 +32,15 @@ string continuarProcesso(string pid){
 	return continua;
 }
 
+string filtrarProcesso(string nomeProcesso){
+	string filtra ("ps | grep ");
+	filtra += nomeProcesso;
+	return filtra;
+}
+
 int main(){
 	string pid ("");
+	string nomeProcesso ("");
 
 	cout << "PID Matar: ";
 	cin >> pid;
@@ -49,6 +56,11 @@ int main(){
 	cin >> pid;
 	const char * continua = continuarProcesso(pid).c_str();
 	system(continua);
+
+	cout << "Filtrar processo: ";
+	cin >> nomeProcesso;
+	const char * filtra = filtrarProcesso(nomeProcesso).c_str();
+	system(filtra);
 
 	return 0;
 }

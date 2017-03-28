@@ -7,6 +7,7 @@
 
 //FUNÇÕES COMPLEMENTARES PARA GERENCIADOR DE TAREFAS
 
+#include <funcoesGerenciador.h>
 #include <iostream>
 #include <stdio.h>
 #include <string.h>
@@ -14,7 +15,7 @@
 #include <stdlib.h>
 using namespace std;
 
-void mataProcesso(string pid){
+void FuncoesGerenciador::mataProcesso(string pid){
 	string matar ("kill "); // Cria string com "kill " dentro dela
 	matar += pid; //concatena a string com o pid informado pelo usuário
 	const char * matarProcesso = matar.c_str(); //converte uma string em char
@@ -22,7 +23,7 @@ void mataProcesso(string pid){
 	
 }	
 
-void pausarProcesso(string pid){
+void FuncoesGerenciador::pausarProcesso(string pid){
 	string stop ("kill -stop ");
 	stop += pid;
 	const char * pausarProcesso = stop.c_str();
@@ -30,21 +31,21 @@ void pausarProcesso(string pid){
 
 }
 
-void continuarProcesso(string pid){
+void FuncoesGerenciador::continuarProcesso(string pid){
 	string continua ("kill -cont ");
 	continua += pid;
 	const char * continuarProcesso = continua.c_str();
 	system(continuarProcesso);
 }
 
-void filtrarProcesso(string nomeProcesso){
+void FuncoesGerenciador::filtrarProcesso(string nomeProcesso){
 	string filtra ("ps -aux | grep ");
 	filtra += nomeProcesso;
 	const char * filtrarProcesso = filtra.c_str();
 	system(filtrarProcesso);
 }
 
-int main(){
+/*int main(){
 	string pid ("");
 	string nomeProcesso ("");
 
@@ -66,4 +67,4 @@ int main(){
 	filtrarProcesso(nomeProcesso);
 
 	return 0;
-}
+}*/

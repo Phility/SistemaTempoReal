@@ -14,28 +14,34 @@
 #include <stdlib.h>
 using namespace std;
 
-string mataProcesso(string pid){
+void mataProcesso(string pid){
 	string matar ("kill "); // Cria string com "kill " dentro dela
 	matar += pid; //concatena a string com o pid informado pelo usuário
-	return matar;
+	const char * matarProcesso = matar.c_str(); //converte uma string em char
+	system(matarProcesso);
+	
 }	
 
-string pausarProcesso(string pid){
+void pausarProcesso(string pid){
 	string stop ("kill -stop ");
 	stop += pid;
-	return stop;
+	const char * pausarProcesso = stop.c_str();
+	system(pausarProcesso);
+
 }
 
-string continuarProcesso(string pid){
+void continuarProcesso(string pid){
 	string continua ("kill -cont ");
 	continua += pid;
-	return continua;
+	const char * continuarProcesso = continua.c_str();
+	system(continuarProcesso);
 }
 
-string filtrarProcesso(string nomeProcesso){
-	string filtra ("ps | grep ");
+void filtrarProcesso(string nomeProcesso){
+	string filtra ("ps -aux | grep ");
 	filtra += nomeProcesso;
-	return filtra;
+	const char * filtrarProcesso = filtra.c_str();
+	system(filtrarProcesso);
 }
 
 int main(){
@@ -44,23 +50,20 @@ int main(){
 
 	cout << "PID Matar: ";
 	cin >> pid;
-	const char * matar = mataProcesso(pid).c_str(); //converte uma string em char
-	system(matar);
+	mataProcesso(pid);
+	
 
 	cout << "PID stop: ";
 	cin >> pid;
-	const char * stop = pausarProcesso(pid).c_str();
-	system(stop);
-
+	pausarProcesso(pid);
+	
 	cout << "PID continua: ";
 	cin >> pid;
-	const char * continua = continuarProcesso(pid).c_str();
-	system(continua);
+	continuarProcesso(pid);
 
 	cout << "Filtrar processo: ";
 	cin >> nomeProcesso;
-	const char * filtra = filtrarProcesso(nomeProcesso).c_str();
-	system(filtra);
+	filtrarProcesso(nomeProcesso);
 
 	return 0;
 }

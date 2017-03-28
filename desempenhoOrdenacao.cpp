@@ -11,6 +11,7 @@
 #include <stdlib.h>
 #include <time.h>  
 #include <cstdlib>
+#include <stdio.h>
 
 #define TAMANHO1 1000
 #define TAMANHO2 10000

@@ -9,6 +9,9 @@
 
 #ifndef FUNCOESGERENCIADOR_H
 #define FUNCOESGERENCIADOR_H
+#include <string>
+#include <string.h>
+using namespace std;
 
 class FuncoesGerenciador{
 	public:

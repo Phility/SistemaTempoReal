@@ -7,7 +7,7 @@
 
 //FUNÇÕES COMPLEMENTARES PARA GERENCIADOR DE TAREFAS
 
-#include <funcoesGerenciador.h>
+#include "funcoesGerenciador.h"
 #include <iostream>
 #include <stdio.h>
 #include <string.h>
@@ -40,11 +40,11 @@ void FuncoesGerenciador::continuarProcesso(string pid){
 }
 
 void FuncoesGerenciador::filtrarProcesso(string nomeProcesso){
-	string filtra ("ps -aux | grep ");
+	string filtra ("ps -eo pid,user,s,pri,ni,size,pcpu,pmem,comm | grep ");
 	filtra += nomeProcesso;
+	filtra += (" > processos.txt");
 	const char * filtrarProcesso = filtra.c_str();
 	system(filtrarProcesso);
-	system("ps -eo pid,user,s,pri,ni,size,pcpu,pmem,comm > processos.txt");
 }
 
 /*int main(){

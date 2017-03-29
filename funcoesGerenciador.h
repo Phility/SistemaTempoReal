@@ -1,3 +1,12 @@
+//Sistema de Tempo Real
+//Unviversidade Federal do Rio Grande do Norte
+//Departamento de Engenharia de Computação e Automação
+//Alunos: Carlos Gabriel Gomes de Melo Silva
+//        Felipe Fernandes Lopes
+//        Philipy Augusto Silveira de Brito
+
+//FUNÇÕES COMPLEMENTARES PARA GERENCIADOR DE TAREFAS
+
 #ifndef FUNCOESGERENCIADOR_H
 #define FUNCOESGERENCIADOR_H
 

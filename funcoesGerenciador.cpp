@@ -16,11 +16,11 @@
 using namespace std;
 
 void FuncoesGerenciador::mataProcesso(string pid){
-	string matar ("kill "); // Cria string com "kill " dentro dela
+	string matar ("kill -9 "); // Cria string com "kill " dentro dela
 	matar += pid; //concatena a string com o pid informado pelo usuário
 	const char * matarProcesso = matar.c_str(); //converte uma string em char
 	system(matarProcesso);
-	
+	system("ps -eo pid,user,s,pri,ni,size,pcpu,pmem,comm > processos.txt");
 }	
 
 void FuncoesGerenciador::pausarProcesso(string pid){
@@ -28,7 +28,7 @@ void FuncoesGerenciador::pausarProcesso(string pid){
 	stop += pid;
 	const char * pausarProcesso = stop.c_str();
 	system(pausarProcesso);
-
+	system("ps -eo pid,user,s,pri,ni,size,pcpu,pmem,comm > processos.txt");
 }
 
 void FuncoesGerenciador::continuarProcesso(string pid){
@@ -36,6 +36,7 @@ void FuncoesGerenciador::continuarProcesso(string pid){
 	continua += pid;
 	const char * continuarProcesso = continua.c_str();
 	system(continuarProcesso);
+	system("ps -eo pid,user,s,pri,ni,size,pcpu,pmem,comm > processos.txt");
 }
 
 void FuncoesGerenciador::filtrarProcesso(string nomeProcesso){
@@ -43,6 +44,7 @@ void FuncoesGerenciador::filtrarProcesso(string nomeProcesso){
 	filtra += nomeProcesso;
 	const char * filtrarProcesso = filtra.c_str();
 	system(filtrarProcesso);
+	system("ps -eo pid,user,s,pri,ni,size,pcpu,pmem,comm > processos.txt");
 }
 
 /*int main(){

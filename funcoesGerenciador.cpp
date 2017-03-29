@@ -20,7 +20,7 @@ void FuncoesGerenciador::mataProcesso(string pid){
 	matar += pid; //concatena a string com o pid informado pelo usuário
 	const char * matarProcesso = matar.c_str(); //converte uma string em char
 	system(matarProcesso);
-	system("ps -eo pid,user,s,pri,ni,size,pcpu,pmem,comm > processos.txt");
+	system("ps -eo pid,user,s,pri,ni,size,pcpu,pmem,comm > processos.txt"); //Da um ps no sistema limitando as informações de retorno e salva em um arquivo txt processos
 }	
 
 void FuncoesGerenciador::pausarProcesso(string pid){
